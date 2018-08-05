@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.algorithms.planarity.check_planarity &mdash; NetworkX 2.2rc1.dev20180805181421 documentation</title>
+  <title>networkx.algorithms.planarity.check_planarity &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805181421 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805181421
+                2.2rc1.dev_20180805190014
               </div>
             
           
@@ -245,7 +245,7 @@
 <dl class="function">
 <dt id="networkx.algorithms.planarity.check_planarity">
 <code class="descname">check_planarity</code><span class="sig-paren">(</span><em>G</em>, <em>counterexample=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/networkx/algorithms/planarity.html#check_planarity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.planarity.check_planarity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if a graph is planar and returns a counterexample or an embedding</p>
+<dd><p>Check if a graph is planar and return a counterexample or an embedding.</p>
 <p>A graph is planar iff it can be drawn in a plane without
 any edge intersections.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -255,11 +255,11 @@ any edge intersections.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>G</strong> (<em>NetworkX graph</em>)</li>
 <li><strong>counterexample</strong> (<em>bool</em>) – A Kuratowski subgraph (to proof non planarity) is only returned if set
-to true</li>
+to true.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>(is_planar, certificate)</strong> – is_planar is true if the graph is planar
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>(is_planar, certificate)</strong> – is_planar is true if the graph is planar.
 If the graph is planar <code class="xref py py-obj docutils literal notranslate"><span class="pre">certificate</span></code> is a PlanarEmbedding
 otherwise it is a Kuratowski subgraph.</p>
 </td>
@@ -271,7 +271,7 @@ otherwise it is a Kuratowski subgraph.</p>
 </table>
 <p class="rubric">Notes</p>
 <p>A (combinatorial) embedding consists of cyclic orderings of the incident
-edges at each vertex, given such an embedding there are multiple approaches
+edges at each vertex. Given such an embedding there are multiple approaches
 discussed in literature to drawing the graph (subject to various
 constraints, e.g. integer coordinates), see e.g. [2].</p>
 <p>The planarity check algorithm and extraction of the combinatorial embedding
@@ -344,7 +344,7 @@ Lecture Notes Series on Computing: Volume 12
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180805181421',
+            VERSION:'2.2rc1.dev20180805190014',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

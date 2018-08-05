@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Planarity &mdash; NetworkX 2.2rc1.dev20180805181421 documentation</title>
+  <title>Planarity &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805181421 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
             href="../../_static/opensearch.xml"/>
     
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805181421
+                2.2rc1.dev_20180805190014
               </div>
             
           
@@ -247,7 +247,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="generated/networkx.algorithms.planarity.check_planarity.html#networkx.algorithms.planarity.check_planarity" title="networkx.algorithms.planarity.check_planarity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_planarity</span></code></a>(G[,&nbsp;counterexample])</td>
-<td>Checks if a graph is planar and returns a counterexample or an embedding</td>
+<td>Check if a graph is planar and return a counterexample or an embedding.</td>
 </tr>
 </tbody>
 </table>
@@ -318,7 +318,7 @@ orientation. The following results in exactly the same PlanarEmbedding:</p>
 </pre></div>
 </div>
 <p>After creating a graph, it is possible to validate that the PlanarEmbedding
-object is correct.</p>
+object is correct:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">.</span><span class="n">check_structure</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -333,13 +333,13 @@ object is correct.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start_node</strong> (<em>node</em>) – Start node of inserted edge</li>
-<li><strong>end_node</strong> (<em>node</em>) – End node of inserted edge</li>
-<li><strong>reference_neighbor</strong> (<em>node</em>) – End node of reference edge</li>
+<li><strong>start_node</strong> (<em>node</em>) – Start node of inserted edge.</li>
+<li><strong>end_node</strong> (<em>node</em>) – End node of inserted edge.</li>
+<li><strong>reference_neighbor</strong> (<em>node</em>) – End node of reference edge.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">nx.NetworkXException</span></code> – If the reference_neighbor does not exist</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">nx.NetworkXException</span></code> – If the reference_neighbor does not exist.</p>
 </td>
 </tr>
 </tbody>
@@ -361,13 +361,13 @@ object is correct.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start_node</strong> (<em>node</em>) – Start node of inserted edge</li>
-<li><strong>end_node</strong> (<em>node</em>) – End node of inserted edge</li>
-<li><strong>reference_neighbor</strong> (<em>node</em>) – End node of reference edge</li>
+<li><strong>start_node</strong> (<em>node</em>) – Start node of inserted edge.</li>
+<li><strong>end_node</strong> (<em>node</em>) – End node of inserted edge.</li>
+<li><strong>reference_neighbor</strong> (<em>node</em>) – End node of reference edge.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">nx.NetworkXException</span></code> – If the reference_neighbor does not exist</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">nx.NetworkXException</span></code> – If the reference_neighbor does not exist.</p>
 </td>
 </tr>
 </tbody>
@@ -406,7 +406,7 @@ object is correct.</p>
 <dd><p>Runs without exceptions if this object is valid.</p>
 <p>Checks that the following properties are fulfilled:</p>
 <ul class="simple">
-<li>Edges go in both directions (because the edge attributes differ)</li>
+<li>Edges go in both directions (because the edge attributes differ).</li>
 <li>Every edge has a ‘cw’ and ‘ccw’ attribute which corresponds to a
 correct planar embedding.</li>
 <li>A node with a degree larger than 0 has a node attribute ‘first_nbr’.</li>
@@ -429,10 +429,10 @@ PlanarEmbedding is invalid.</td>
 <dd><p>Adds half-edges for (v, w) and (w, v) at some position.</p>
 <p>This method should only be called if v and w are in different
 components, or it might break the embedding.
-This especially meas that if <code class="xref py py-obj docutils literal notranslate"><span class="pre">connect_components(v,</span> <span class="pre">w)</span></code> is called it is
-not allowed to call <code class="xref py py-obj docutils literal notranslate"><span class="pre">connect_components(w,</span> <span class="pre">v)</span></code> afterwards.
-The neighbor orientations in both directions are all set correctly
-after the first call.</p>
+This especially means that if <code class="xref py py-obj docutils literal notranslate"><span class="pre">connect_components(v,</span> <span class="pre">w)</span></code>
+is called it is not allowed to call <code class="xref py py-obj docutils literal notranslate"><span class="pre">connect_components(w,</span> <span class="pre">v)</span></code>
+afterwards. The neighbor orientations in both directions are
+all set correctly after the first call.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -480,7 +480,7 @@ contained.</p>
 <dl class="method">
 <dt id="networkx.algorithms.planarity.PlanarEmbedding.neighbors_cw_order">
 <code class="descname">neighbors_cw_order</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/networkx/algorithms/planarity.html#PlanarEmbedding.neighbors_cw_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.planarity.PlanarEmbedding.neighbors_cw_order" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generator for the neighbors of v in clockwise order</p>
+<dd><p>Generator for the neighbors of v in clockwise order.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -496,7 +496,7 @@ contained.</p>
 <dl class="method">
 <dt id="networkx.algorithms.planarity.PlanarEmbedding.next_face_half_edge">
 <code class="descname">next_face_half_edge</code><span class="sig-paren">(</span><em>v</em>, <em>w</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/networkx/algorithms/planarity.html#PlanarEmbedding.next_face_half_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.planarity.PlanarEmbedding.next_face_half_edge" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the following half-edge left of a face</p>
+<dd><p>Returns the following half-edge left of a face.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -520,10 +520,10 @@ contained.</p>
 <dl class="method">
 <dt id="networkx.algorithms.planarity.PlanarEmbedding.traverse_face">
 <code class="descname">traverse_face</code><span class="sig-paren">(</span><em>v</em>, <em>w</em>, <em>mark_half_edges=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/networkx/algorithms/planarity.html#PlanarEmbedding.traverse_face"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.planarity.PlanarEmbedding.traverse_face" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns nodes on the face that belong to the half-edge (v, w)</p>
+<dd><p>Returns nodes on the face that belong to the half-edge (v, w).</p>
 <p>The face that is traversed lies to the right of the half-edge (in an
 orientation where v is below w).</p>
-<p>Optionally it is possible to pass a set in which all encountered half
+<p>Optionally it is possible to pass a set to which all encountered half
 edges are added. Before calling this method, this set must not include
 any half-edges that belong to the face.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -531,13 +531,13 @@ any half-edges that belong to the face.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>v</strong> (<em>node</em>) – Start node of half-edge</li>
-<li><strong>w</strong> (<em>node</em>) – End node of half-edge</li>
-<li><strong>mark_half_edges</strong> (<em>set, optional</em>) – Set to which all encountered half-edges are added</li>
+<li><strong>v</strong> (<em>node</em>) – Start node of half-edge.</li>
+<li><strong>w</strong> (<em>node</em>) – End node of half-edge.</li>
+<li><strong>mark_half_edges</strong> (<em>set, optional</em>) – Set to which all encountered half-edges are added.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>face</strong> – A list of nodes that lie on this face</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>face</strong> – A list of nodes that lie on this face.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
@@ -594,7 +594,7 @@ any half-edges that belong to the face.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.2rc1.dev20180805181421',
+            VERSION:'2.2rc1.dev20180805190014',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

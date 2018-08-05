@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.algorithms.planarity &mdash; NetworkX 2.2rc1.dev20180805181421 documentation</title>
+  <title>networkx.algorithms.planarity &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805181421 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805181421
+                2.2rc1.dev_20180805190014
               </div>
             
           
@@ -166,7 +166,7 @@
 
 
 <div class="viewcode-block" id="check_planarity"><a class="viewcode-back" href="../../../reference/algorithms/generated/networkx.algorithms.planarity.check_planarity.html#networkx.algorithms.planarity.check_planarity">[docs]</a><span class="k">def</span> <span class="nf">check_planarity</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">counterexample</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Checks if a graph is planar and returns a counterexample or an embedding</span>
+    <span class="sd">&quot;&quot;&quot;Check if a graph is planar and return a counterexample or an embedding.</span>
 
 <span class="sd">    A graph is planar iff it can be drawn in a plane without</span>
 <span class="sd">    any edge intersections.</span>
@@ -176,19 +176,19 @@
 <span class="sd">    G : NetworkX graph</span>
 <span class="sd">    counterexample : bool</span>
 <span class="sd">        A Kuratowski subgraph (to proof non planarity) is only returned if set</span>
-<span class="sd">        to true</span>
+<span class="sd">        to true.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    (is_planar, certificate) : (bool, NetworkX graph) tuple</span>
-<span class="sd">        is_planar is true if the graph is planar</span>
+<span class="sd">        is_planar is true if the graph is planar.</span>
 <span class="sd">        If the graph is planar `certificate` is a PlanarEmbedding</span>
 <span class="sd">        otherwise it is a Kuratowski subgraph.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    A (combinatorial) embedding consists of cyclic orderings of the incident</span>
-<span class="sd">    edges at each vertex, given such an embedding there are multiple approaches</span>
+<span class="sd">    edges at each vertex. Given such an embedding there are multiple approaches</span>
 <span class="sd">    discussed in literature to drawing the graph (subject to various</span>
 <span class="sd">    constraints, e.g. integer coordinates), see e.g. [2].</span>
 
@@ -224,10 +224,7 @@
 
 
 <span class="k">def</span> <span class="nf">check_planarity_recursive</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">counterexample</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Checks if a graph is planar and returns a counterexample or an embedding</span>
-
-<span class="sd">    This is the recursive version of :meth:`check_planarity`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Recursive version of :meth:`check_planarity`.&quot;&quot;&quot;</span>
     <span class="n">planarity_state</span> <span class="o">=</span> <span class="n">LRPlanarity</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
     <span class="n">embedding</span> <span class="o">=</span> <span class="n">planarity_state</span><span class="o">.</span><span class="n">lr_planarity_recursive</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">embedding</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -242,7 +239,7 @@
 
 
 <span class="k">def</span> <span class="nf">get_counterexample</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Obtains a Kuratowski subgraph</span>
+    <span class="sd">&quot;&quot;&quot;Obtains a Kuratowski subgraph.</span>
 
 <span class="sd">    Raises nx.NetworkXException if G is planar.</span>
 
@@ -303,7 +300,7 @@
 
 
 <span class="k">class</span> <span class="nc">Interval</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a set of return edges</span>
+    <span class="sd">&quot;&quot;&quot;Represents a set of return edges.</span>
 
 <span class="sd">    All return edges in an interval induce a same constraint on the contained</span>
 <span class="sd">    edges, which means that all edges must either have a left orientation or</span>
@@ -329,7 +326,7 @@
 
 
 <span class="k">class</span> <span class="nc">ConflictPair</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a different constraint between two intervals</span>
+    <span class="sd">&quot;&quot;&quot;Represents a different constraint between two intervals.</span>
 
 <span class="sd">    The edges in the left interval must have a different orientation than</span>
 <span class="sd">    the one in the right interval.</span>
@@ -363,7 +360,7 @@
 
 
 <span class="k">class</span> <span class="nc">LRPlanarity</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A class to maintain the state during planarity check&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A class to maintain the state during planarity check.&quot;&quot;&quot;</span>
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;roots&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="s1">&#39;lowpt&#39;</span><span class="p">,</span> <span class="s1">&#39;lowpt2&#39;</span><span class="p">,</span> <span class="s1">&#39;nesting_depth&#39;</span><span class="p">,</span>
         <span class="s1">&#39;parent_edge&#39;</span><span class="p">,</span> <span class="s1">&#39;DG&#39;</span><span class="p">,</span> <span class="s1">&#39;adjs&#39;</span><span class="p">,</span> <span class="s1">&#39;ordered_adjs&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;side&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span>
@@ -411,7 +408,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">PlanarEmbedding</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">lr_planarity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Execute the LR planarity test</span>
+        <span class="sd">&quot;&quot;&quot;Execute the LR planarity test.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -534,7 +531,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span>
 
     <span class="k">def</span> <span class="nf">dfs_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Orient the graph by DFS-traversal, compute lowpoints and nesting order</span>
+        <span class="sd">&quot;&quot;&quot;Orient the graph by DFS, compute lowpoints and nesting order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># the recursion stack</span>
         <span class="n">dfs_stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
@@ -621,7 +618,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">lowpt2</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lowpt2</span><span class="p">[</span><span class="n">e</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">lowpt2</span><span class="p">[</span><span class="n">vw</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">dfs_testing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test for LR partition&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Test for LR partition.&quot;&quot;&quot;</span>
         <span class="c1"># the recursion stack</span>
         <span class="n">dfs_stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="c1"># index of next edge to handle in adjacency list of each node</span>
@@ -780,7 +777,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="n">hr</span>
 
     <span class="k">def</span> <span class="nf">dfs_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;completes the embedding&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Completes the embedding.&quot;&quot;&quot;</span>
         <span class="c1"># the recursion stack</span>
         <span class="n">dfs_stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="c1"># index of next edge to handle in adjacency list of each node</span>
@@ -932,7 +929,7 @@
 <span class="sd">    &gt;&gt;&gt; G.add_half_edge_ccw(3, 0, None)</span>
 
 <span class="sd">    After creating a graph, it is possible to validate that the PlanarEmbedding</span>
-<span class="sd">    object is correct.</span>
+<span class="sd">    object is correct:</span>
 
 <span class="sd">    &gt;&gt;&gt; G.check_structure()</span>
 
@@ -954,7 +951,7 @@
         <span class="k">return</span> <span class="n">embedding</span></div>
 
 <div class="viewcode-block" id="PlanarEmbedding.neighbors_cw_order"><a class="viewcode-back" href="../../../reference/algorithms/planarity.html#networkx.algorithms.planarity.PlanarEmbedding.neighbors_cw_order">[docs]</a>    <span class="k">def</span> <span class="nf">neighbors_cw_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generator for the neighbors of v in clockwise order</span>
+        <span class="sd">&quot;&quot;&quot;Generator for the neighbors of v in clockwise order.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -980,7 +977,7 @@
 
 <span class="sd">        Checks that the following properties are fulfilled:</span>
 
-<span class="sd">        * Edges go in both directions (because the edge attributes differ)</span>
+<span class="sd">        * Edges go in both directions (because the edge attributes differ).</span>
 <span class="sd">        * Every edge has a &#39;cw&#39; and &#39;ccw&#39; attribute which corresponds to a</span>
 <span class="sd">          correct planar embedding.</span>
 <span class="sd">        * A node with a degree larger than 0 has a node attribute &#39;first_nbr&#39;.</span>
@@ -1044,16 +1041,16 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        start_node : node</span>
-<span class="sd">            Start node of inserted edge</span>
+<span class="sd">            Start node of inserted edge.</span>
 <span class="sd">        end_node : node</span>
-<span class="sd">            End node of inserted edge</span>
+<span class="sd">            End node of inserted edge.</span>
 <span class="sd">        reference_neighbor: node</span>
-<span class="sd">            End node of reference edge</span>
+<span class="sd">            End node of reference edge.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        nx.NetworkXException</span>
-<span class="sd">            If the reference_neighbor does not exist</span>
+<span class="sd">            If the reference_neighbor does not exist.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -1086,16 +1083,16 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        start_node : node</span>
-<span class="sd">            Start node of inserted edge</span>
+<span class="sd">            Start node of inserted edge.</span>
 <span class="sd">        end_node : node</span>
-<span class="sd">            End node of inserted edge</span>
+<span class="sd">            End node of inserted edge.</span>
 <span class="sd">        reference_neighbor: node</span>
-<span class="sd">            End node of reference edge</span>
+<span class="sd">            End node of reference edge.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        nx.NetworkXException</span>
-<span class="sd">            If the reference_neighbor does not exist</span>
+<span class="sd">            If the reference_neighbor does not exist.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -1129,10 +1126,10 @@
 
 <span class="sd">        This method should only be called if v and w are in different</span>
 <span class="sd">        components, or it might break the embedding.</span>
-<span class="sd">        This especially meas that if `connect_components(v, w)` is called it is</span>
-<span class="sd">        not allowed to call `connect_components(w, v)` afterwards.</span>
-<span class="sd">        The neighbor orientations in both directions are all set correctly</span>
-<span class="sd">        after the first call.</span>
+<span class="sd">        This especially means that if `connect_components(v, w)`</span>
+<span class="sd">        is called it is not allowed to call `connect_components(w, v)`</span>
+<span class="sd">        afterwards. The neighbor orientations in both directions are</span>
+<span class="sd">        all set correctly after the first call.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1169,7 +1166,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">add_half_edge_ccw</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PlanarEmbedding.next_face_half_edge"><a class="viewcode-back" href="../../../reference/algorithms/planarity.html#networkx.algorithms.planarity.PlanarEmbedding.next_face_half_edge">[docs]</a>    <span class="k">def</span> <span class="nf">next_face_half_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the following half-edge left of a face</span>
+        <span class="sd">&quot;&quot;&quot;Returns the following half-edge left of a face.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1184,28 +1181,28 @@
         <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">new_node</span></div>
 
 <div class="viewcode-block" id="PlanarEmbedding.traverse_face"><a class="viewcode-back" href="../../../reference/algorithms/planarity.html#networkx.algorithms.planarity.PlanarEmbedding.traverse_face">[docs]</a>    <span class="k">def</span> <span class="nf">traverse_face</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">mark_half_edges</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns nodes on the face that belong to the half-edge (v, w)</span>
+        <span class="sd">&quot;&quot;&quot;Returns nodes on the face that belong to the half-edge (v, w).</span>
 
 <span class="sd">        The face that is traversed lies to the right of the half-edge (in an</span>
 <span class="sd">        orientation where v is below w).</span>
 
-<span class="sd">        Optionally it is possible to pass a set in which all encountered half</span>
+<span class="sd">        Optionally it is possible to pass a set to which all encountered half</span>
 <span class="sd">        edges are added. Before calling this method, this set must not include</span>
 <span class="sd">        any half-edges that belong to the face.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        v : node</span>
-<span class="sd">            Start node of half-edge</span>
+<span class="sd">            Start node of half-edge.</span>
 <span class="sd">        w : node</span>
-<span class="sd">            End node of half-edge</span>
+<span class="sd">            End node of half-edge.</span>
 <span class="sd">        mark_half_edges: set, optional</span>
-<span class="sd">            Set to which all encountered half-edges are added</span>
+<span class="sd">            Set to which all encountered half-edges are added.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        face : list</span>
-<span class="sd">            A list of nodes that lie on this face</span>
+<span class="sd">            A list of nodes that lie on this face.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">mark_half_edges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">mark_half_edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -1270,7 +1267,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180805181421',
+            VERSION:'2.2rc1.dev20180805190014',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
