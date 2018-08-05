@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Planarity &mdash; NetworkX 2.2rc1.dev20180805150714 documentation</title>
+  <title>Planarity &mdash; NetworkX 2.2rc1.dev20180805165107 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805150714 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180805165107 documentation"
             href="../../_static/opensearch.xml"/>
     
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805150714
+                2.2rc1.dev_20180805165107
               </div>
             
           
@@ -255,7 +255,7 @@
 <dt id="networkx.algorithms.planarity.PlanarEmbedding">
 <em class="property">class </em><code class="descname">PlanarEmbedding</code><span class="sig-paren">(</span><em>incoming_graph_data=None</em>, <em>**attr</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/networkx/algorithms/planarity.html#PlanarEmbedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.planarity.PlanarEmbedding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a planar graph with its planar embedding.</p>
-<p>The planar embedding is given by a <a class="reference external" href="https://en.wikipedia.org/wiki/Graph_embedding#Combinatorial_embedding/">combinatorial embedding</a>.</p>
+<p>The planar embedding is given by a <a class="reference external" href="https://en.wikipedia.org/wiki/Graph_embedding#Combinatorial_embedding">combinatorial embedding</a>.</p>
 <p><strong>Neighbor ordering:</strong></p>
 <p>In comparison to a usual graph structure, the embedding also stores the
 order of all neighbors for every vertex.
@@ -288,7 +288,7 @@ for algorithms that require undirected graphs, because the method
 PlanarGraph must have edges in both directions.</p>
 <p><strong>Half edges:</strong></p>
 <p>In methods like <a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_ccw" title="networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_ccw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_half_edge_ccw</span></code></a> the term “half-edge” is used, which is
-a term that is used in <a class="reference external" href="https://en.wikipedia.org/wiki/Doubly_connected_edge_list/">doubly connected edge lists</a>. It is used
+a term that is used in <a class="reference external" href="https://en.wikipedia.org/wiki/Doubly_connected_edge_list">doubly connected edge lists</a>. It is used
 to emphasize that the edge is only in one direction and there exists
 another half-edge in the opposite direction.
 While conventional edges always have two faces (including outer face) next
@@ -317,7 +317,7 @@ orientation. The following results in exactly the same PlanarEmbedding:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">.</span><span class="n">add_half_edge_ccw</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After creating a graph it is possible to validate that the PlanarEmbedding
+<p>After creating a graph, it is possible to validate that the PlanarEmbedding
 object is correct.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">.</span><span class="n">check_structure</span><span class="p">()</span>
 </pre></div>
@@ -396,7 +396,7 @@ object is correct.</p>
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_ccw" title="networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_ccw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_half_edge_ccw()</span></code></a>, <a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_cw" title="networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_cw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_half_edge_cw()</span></code></a>, <a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.connect_components" title="networkx.algorithms.planarity.PlanarEmbedding.connect_components"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect_components()</span></code></a>, <a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.connect_components" title="networkx.algorithms.planarity.PlanarEmbedding.connect_components"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect_components()</span></code></a>, <a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_first" title="networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_first"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_half_edge_first()</span></code></a></p>
+<p class="last"><a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_ccw" title="networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_ccw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_half_edge_ccw()</span></code></a>, <a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_cw" title="networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_cw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_half_edge_cw()</span></code></a>, <a class="reference internal" href="#networkx.algorithms.planarity.PlanarEmbedding.connect_components" title="networkx.algorithms.planarity.PlanarEmbedding.connect_components"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect_components()</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -507,10 +507,10 @@ contained.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tuple</strong></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>half-edge</strong></p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">half-edge</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
 </td>
 </tr>
 </tbody>
@@ -537,7 +537,7 @@ any half-edges that belong to the face.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of nodes that lie on this face</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>face</strong> – A list of nodes that lie on this face</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
@@ -594,7 +594,7 @@ any half-edges that belong to the face.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.2rc1.dev20180805150714',
+            VERSION:'2.2rc1.dev20180805165107',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
