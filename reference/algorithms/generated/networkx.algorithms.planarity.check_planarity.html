@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.algorithms.planarity.check_planarity &mdash; NetworkX 2.2rc1.dev20180805142449 documentation</title>
+  <title>networkx.algorithms.planarity.check_planarity &mdash; NetworkX 2.2rc1.dev20180805150714 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805142449 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180805150714 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805142449
+                2.2rc1.dev_20180805150714
               </div>
             
           
@@ -246,9 +246,8 @@
 <dt id="networkx.algorithms.planarity.check_planarity">
 <code class="descname">check_planarity</code><span class="sig-paren">(</span><em>G</em>, <em>counterexample=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/networkx/algorithms/planarity.html#check_planarity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.planarity.check_planarity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if a graph is planar and returns a counterexample or an embedding</p>
-<blockquote>
-<div>A graph is planar iff it can be drawn in a plane without
-any edge intersections.</div></blockquote>
+<p>A graph is planar iff it can be drawn in a plane without
+any edge intersections.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -260,13 +259,12 @@ to true</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>is_planar</strong> (<em>bool</em>) – Is true if the graph is planar</li>
-<li><em>certificate</em> – If the graph is planar this is a planar embedding (dict).
-If the graph is not planar and counterexample is true,
-this is a Kuratowski subgraph.</li>
-</ul>
-</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tuple</strong> – is_planar is true if the graph is planar
+If the graph is planar <code class="xref py py-obj docutils literal notranslate"><span class="pre">certificate</span></code> is a PlanarEmbedding
+otherwise it is a Kuratowski subgraph.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(is_planar : bool , certificate)</p>
 </td>
 </tr>
 </tbody>
@@ -346,7 +344,7 @@ Lecture Notes Series on Computing: Volume 12
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180805142449',
+            VERSION:'2.2rc1.dev20180805150714',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

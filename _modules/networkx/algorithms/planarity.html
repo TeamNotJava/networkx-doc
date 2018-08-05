@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.algorithms.planarity &mdash; NetworkX 2.2rc1.dev20180805142449 documentation</title>
+  <title>networkx.algorithms.planarity &mdash; NetworkX 2.2rc1.dev20180805150714 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805142449 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180805150714 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805142449
+                2.2rc1.dev_20180805150714
               </div>
             
           
@@ -168,8 +168,8 @@
 <div class="viewcode-block" id="check_planarity"><a class="viewcode-back" href="../../../reference/algorithms/generated/networkx.algorithms.planarity.check_planarity.html#networkx.algorithms.planarity.check_planarity">[docs]</a><span class="k">def</span> <span class="nf">check_planarity</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">counterexample</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if a graph is planar and returns a counterexample or an embedding</span>
 
-<span class="sd">     A graph is planar iff it can be drawn in a plane without</span>
-<span class="sd">     any edge intersections.</span>
+<span class="sd">    A graph is planar iff it can be drawn in a plane without</span>
+<span class="sd">    any edge intersections.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -180,13 +180,10 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    is_planar : bool</span>
-<span class="sd">        Is true if the graph is planar</span>
-
-<span class="sd">    certificate :</span>
-<span class="sd">        If the graph is planar this is a planar embedding (dict).</span>
-<span class="sd">        If the graph is not planar and counterexample is true,</span>
-<span class="sd">        this is a Kuratowski subgraph.</span>
+<span class="sd">    tuple : (is_planar : bool , certificate)</span>
+<span class="sd">        is_planar is true if the graph is planar</span>
+<span class="sd">        If the graph is planar `certificate` is a PlanarEmbedding</span>
+<span class="sd">        otherwise it is a Kuratowski subgraph.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -226,10 +223,10 @@
         <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">embedding</span></div>
 
 
-<span class="c1"># recursive version of check_planarity</span>
 <span class="k">def</span> <span class="nf">check_planarity_recursive</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">counterexample</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if a graph is planar and returns a counterexample or an embedding</span>
-<span class="sd">    This is the recursive version of check_planarity, refer to its documentation for further information.</span>
+
+<span class="sd">    This is the recursive version of :meth:`check_planarity`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">planarity_state</span> <span class="o">=</span> <span class="n">LRPlanarity</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
     <span class="n">embedding</span> <span class="o">=</span> <span class="n">planarity_state</span><span class="o">.</span><span class="n">lr_planarity_recursive</span><span class="p">()</span>
@@ -282,8 +279,10 @@
     <span class="k">return</span> <span class="n">subgraph</span>
 
 
-<span class="c1"># recursive version of get_counterexample</span>
 <span class="k">def</span> <span class="nf">get_counterexample_recursive</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Recursive version of :meth:`get_counterexample`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># copy graph</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
 
@@ -365,6 +364,11 @@
 
 <span class="k">class</span> <span class="nc">LRPlanarity</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A class to maintain the state during planarity check&quot;&quot;&quot;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;roots&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="s1">&#39;lowpt&#39;</span><span class="p">,</span> <span class="s1">&#39;lowpt2&#39;</span><span class="p">,</span> <span class="s1">&#39;nesting_depth&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;parent_edge&#39;</span><span class="p">,</span> <span class="s1">&#39;DG&#39;</span><span class="p">,</span> <span class="s1">&#39;adjs&#39;</span><span class="p">,</span> <span class="s1">&#39;ordered_adjs&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;side&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;stack_bottom&#39;</span><span class="p">,</span> <span class="s1">&#39;lowpt_edge&#39;</span><span class="p">,</span> <span class="s1">&#39;left_ref&#39;</span><span class="p">,</span> <span class="s1">&#39;right_ref&#39;</span><span class="p">,</span> <span class="s1">&#39;embedding&#39;</span>
+    <span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
         <span class="c1"># copy G without adding self-loops</span>
@@ -429,16 +433,26 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">roots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">dfs_orientation</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">G</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># just unsetting this for correctness purposes</span>
+        <span class="c1"># Free no longer used variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lowpt2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjs</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># testing</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">:</span>  <span class="c1"># sort the adjacency lists by nesting depth</span>
             <span class="c1"># note: this sorting leads to non linear time</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)])</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roots</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs_testing</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Free no longer used variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lowpt</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stack_bottom</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lowpt_edge</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="o">.</span><span class="n">edges</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[</span><span class="n">e</span><span class="p">]</span>
@@ -447,21 +461,34 @@
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">:</span>
             <span class="c1"># sort the adjacency lists again</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)])</span>
             <span class="c1"># initialize the embedding</span>
             <span class="n">previous_node</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">add_half_edge_cw</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">previous_node</span><span class="p">)</span>
                 <span class="n">previous_node</span> <span class="o">=</span> <span class="n">w</span>
 
+        <span class="c1"># Free no longer used variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DG</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ref</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="c1"># compute the complete embedding</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roots</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dfs_embedding</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
+        <span class="c1"># Free no longer used variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roots</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent_edge</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_ref</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_ref</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span>
 
-    <span class="c1"># recursive version of lr_planarity</span>
     <span class="k">def</span> <span class="nf">lr_planarity_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Recursive version of :meth:`lr_planarity`.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()</span> <span class="o">-</span> <span class="mi">6</span><span class="p">:</span>
             <span class="c1"># graph is not planar</span>
             <span class="k">return</span> <span class="kc">None</span>
@@ -473,25 +500,27 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">roots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">dfs_orientation_recursive</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">G</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># just unsetting this for correctness purposes</span>
+        <span class="c1"># Free no longer used variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># testing</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">:</span>  <span class="c1"># sort the adjacency lists by nesting depth</span>
             <span class="c1"># note: this sorting leads to non linear time</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)])</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roots</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs_testing_recursive</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">None</span>
 
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="o">.</span><span class="n">edges</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign_recursive</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[</span><span class="n">e</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sign_recursive</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">*</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[</span><span class="n">e</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">:</span>
             <span class="c1"># sort the adjacency lists again</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nesting_depth</span><span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)])</span>
             <span class="c1"># initialize the embedding</span>
             <span class="n">previous_node</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
@@ -504,8 +533,9 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span>
 
-    <span class="c1"># orient the graph by DFS-traversal, compute lowpoints and nesting order</span>
     <span class="k">def</span> <span class="nf">dfs_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Orient the graph by DFS-traversal, compute lowpoints and nesting order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># the recursion stack</span>
         <span class="n">dfs_stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="c1"># index of next edge to handle in adjacency list of each node</span>
@@ -557,8 +587,8 @@
 
                 <span class="n">ind</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="c1"># recursive version of dfs_orientation</span>
     <span class="k">def</span> <span class="nf">dfs_orientation_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Recursive version of :meth:`dfs_orientation`.&quot;&quot;&quot;</span>
         <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_edge</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="o">.</span><span class="n">edges</span> <span class="ow">or</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DG</span><span class="o">.</span><span class="n">edges</span><span class="p">:</span>
@@ -639,9 +669,8 @@
 
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="c1"># recursive version of dfs_testing</span>
     <span class="k">def</span> <span class="nf">dfs_testing_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Recursively test for LR partition&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Recursive version of :meth:`dfs_testing`.&quot;&quot;&quot;</span>
         <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_edge</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
             <span class="n">ei</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
@@ -750,8 +779,8 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="n">hr</span>
 
-    <span class="c1"># complete the embedding</span>
     <span class="k">def</span> <span class="nf">dfs_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;completes the embedding&quot;&quot;&quot;</span>
         <span class="c1"># the recursion stack</span>
         <span class="n">dfs_stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="c1"># index of next edge to handle in adjacency list of each node</span>
@@ -774,15 +803,15 @@
                     <span class="k">break</span>  <span class="c1"># handle next node in dfs_stack (i.e. w)</span>
                 <span class="k">else</span><span class="p">:</span>  <span class="c1"># back edge</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">[</span><span class="n">ei</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="c1"># place v directly after right_ref[w] in embed. list of w</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">add_half_edge_cw</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_ref</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">add_half_edge_cw</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span>
+                                                        <span class="bp">self</span><span class="o">.</span><span class="n">right_ref</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="c1"># place v directly before left_ref[w] in embed. list of w</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">add_half_edge_ccw</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_ref</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">add_half_edge_ccw</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span>
+                                                         <span class="bp">self</span><span class="o">.</span><span class="n">left_ref</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">left_ref</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
-    <span class="c1"># recursive version of dfs_embedding</span>
     <span class="k">def</span> <span class="nf">dfs_embedding_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Recursive version of :meth:`dfs_embedding`.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_adjs</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
             <span class="n">ei</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ei</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_edge</span><span class="p">[</span><span class="n">w</span><span class="p">]:</span>  <span class="c1"># tree edge</span>
@@ -799,8 +828,8 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">add_half_edge_ccw</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_ref</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">left_ref</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
-    <span class="c1"># function to resolve the relative side of an edge to the absolute side</span>
     <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resolve the relative side of an edge to the absolute side.&quot;&quot;&quot;</span>
         <span class="c1"># the recursion stack</span>
         <span class="n">dfs_stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="p">]</span>
         <span class="c1"># dict to remember reference edges</span>
@@ -819,8 +848,8 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">[</span><span class="n">e</span><span class="p">]</span>
 
-    <span class="c1"># recursive version of sign</span>
     <span class="k">def</span> <span class="nf">sign_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Recursive version of :meth:`sign`.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign_recursive</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="n">e</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -828,8 +857,7 @@
 
 
 <div class="viewcode-block" id="PlanarEmbedding"><a class="viewcode-back" href="../../../reference/algorithms/planarity.html#networkx.algorithms.planarity.PlanarEmbedding">[docs]</a><span class="k">class</span> <span class="nc">PlanarEmbedding</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Represents a planar graph with its planar embedding.</span>
+    <span class="sd">&quot;&quot;&quot;Represents a planar graph with its planar embedding.</span>
 
 <span class="sd">    The planar embedding is given by a `combinatorial embedding</span>
 <span class="sd">    &lt;https://en.wikipedia.org/wiki/Graph_embedding#Combinatorial_embedding/&gt;`_.</span>
@@ -839,45 +867,45 @@
 <span class="sd">    In comparison to a usual graph structure, the embedding also stores the</span>
 <span class="sd">    order of all neighbors for every vertex.</span>
 <span class="sd">    The order of the neighbors can be given in clockwise (cw) direction or</span>
-<span class="sd">    counterclockwise (ccw) direction. This order is stored as edge attributes in</span>
-<span class="sd">    the underlying directed graph. For the edge (u, v) the edge attribute &#39;cw&#39;</span>
-<span class="sd">    is set to the neighbor of u that follows immediately after v in clockwise</span>
-<span class="sd">    direction.</span>
+<span class="sd">    counterclockwise (ccw) direction. This order is stored as edge attributes</span>
+<span class="sd">    in the underlying directed graph. For the edge (u, v) the edge attribute</span>
+<span class="sd">    &#39;cw&#39; is set to the neighbor of u that follows immediately after v in</span>
+<span class="sd">    clockwise direction.</span>
 
-<span class="sd">    In order for a PlanarEmbedding to be valid it must fulfill multiple conditions.</span>
-<span class="sd">    It is possible to check if these conditions are fulfilled with the method:</span>
-<span class="sd">    :meth:`check_structure`.</span>
+<span class="sd">    In order for a PlanarEmbedding to be valid it must fulfill multiple</span>
+<span class="sd">    conditions. It is possible to check if these conditions are fulfilled with</span>
+<span class="sd">    the method :meth:`check_structure`.</span>
 <span class="sd">    The conditions are:</span>
 
 <span class="sd">    * Edges must go in both directions (because the edge attributes differ)</span>
 <span class="sd">    * Every edge must have a &#39;cw&#39; and &#39;ccw&#39; attribute which corresponds to a</span>
 <span class="sd">      correct planar embedding.</span>
-<span class="sd">    * A node with a degree larger than 0 must have a node attribute &#39;first_nbr&#39;.</span>
+<span class="sd">    * A node with non zero degree must have a node attribute &#39;first_nbr&#39;.</span>
 
-<span class="sd">    While a PlanarEmbedding is invalid only the following methods should be called:</span>
+<span class="sd">    As long as a PlanarEmbedding is invalid only the following methods should</span>
+<span class="sd">    be called:</span>
 
-<span class="sd">    * :doc:`add_half_edge_ccw`</span>
+<span class="sd">    * :meth:`add_half_edge_ccw`</span>
 <span class="sd">    * :meth:`add_half_edge_cw`</span>
 <span class="sd">    * :meth:`connect_components`</span>
 <span class="sd">    * :meth:`add_half_edge_first`</span>
 
 <span class="sd">    Even though the graph is a subclass of nx.DiGraph, it can still be used</span>
-<span class="sd">    for algorithms that require undirected graphs, because the :meth:`is_directed`</span>
-<span class="sd">    method is overridden. This is possible, because a valid PlanarGraph must have</span>
-<span class="sd">    edges in both directions.</span>
+<span class="sd">    for algorithms that require undirected graphs, because the method</span>
+<span class="sd">    :meth:`is_directed` is overridden. This is possible, because a valid</span>
+<span class="sd">    PlanarGraph must have edges in both directions.</span>
 
 <span class="sd">    **Half edges:**</span>
 
-<span class="sd">    The naming scheme of methods like `add_half_edge_ccw` uses the term &quot;half-edge&quot;,</span>
-<span class="sd">    which is a term that is used in `doubly connected edge lists</span>
-<span class="sd">    &lt;https://en.wikipedia.org/wiki/Doubly_connected_edge_list/&gt;`_. It is used to</span>
-<span class="sd">    emphasize that the edge is only in one direction and there exists another</span>
-<span class="sd">    half-edge in the opposite direction.</span>
-<span class="sd">    While conventional edges always have two faces (including outer face) next to</span>
-<span class="sd">    them, it is possible to assign each half-edge *exactly one* face.</span>
-<span class="sd">    When a half-edge (u, v) is placed in a plane such that u is below v then the</span>
+<span class="sd">    In methods like `add_half_edge_ccw` the term &quot;half-edge&quot; is used, which is</span>
+<span class="sd">    a term that is used in `doubly connected edge lists</span>
+<span class="sd">    &lt;https://en.wikipedia.org/wiki/Doubly_connected_edge_list/&gt;`_. It is used</span>
+<span class="sd">    to emphasize that the edge is only in one direction and there exists</span>
+<span class="sd">    another half-edge in the opposite direction.</span>
+<span class="sd">    While conventional edges always have two faces (including outer face) next</span>
+<span class="sd">    to them, it is possible to assign each half-edge *exactly one* face.</span>
+<span class="sd">    For a half-edge (u, v) that is orientated such that u is below v then the</span>
 <span class="sd">    face that belongs to (u, v) is to the right of this half-edge.</span>
-
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -916,7 +944,8 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        embedding : dict</span>
-<span class="sd">            A dict mapping all nodes to neighbor lists sorted in clockwise order.</span>
+<span class="sd">            A dict mapping all nodes to a list of neighbors sorted in</span>
+<span class="sd">            clockwise order.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">embedding</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -939,7 +968,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="c1"># v has no neighbors</span>
             <span class="k">return</span>
-        <span class="n">start_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;first_nbr&#39;</span><span class="p">]</span>
+        <span class="n">start_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;first_nbr&#39;</span><span class="p">]</span>
         <span class="k">yield</span> <span class="n">start_node</span>
         <span class="n">current_node</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">start_node</span><span class="p">][</span><span class="s1">&#39;cw&#39;</span><span class="p">]</span>
         <span class="k">while</span> <span class="n">start_node</span> <span class="o">!=</span> <span class="n">current_node</span><span class="p">:</span>
@@ -954,7 +983,7 @@
 <span class="sd">        * Edges go in both directions (because the edge attributes differ)</span>
 <span class="sd">        * Every edge has a &#39;cw&#39; and &#39;ccw&#39; attribute which corresponds to a</span>
 <span class="sd">          correct planar embedding.</span>
-<span class="sd">        * A node with a degree larger than 0 must have a node attribute &#39;first_nbr&#39;.</span>
+<span class="sd">        * A node with a degree larger than 0 has a node attribute &#39;first_nbr&#39;.</span>
 
 <span class="sd">        Running this method verifies that the underlying Graph must be planar.</span>
 
@@ -978,9 +1007,9 @@
                 <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Bad embedding. Edge orientations not set correctly.&quot;</span>
                 <span class="k">raise</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXException</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
-                <span class="c1"># Check if opposite half edge exists</span>
+                <span class="c1"># Check if opposite half-edge exists</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Bad embedding. Opposite half edge is missing.&quot;</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Bad embedding. Opposite half-edge is missing.&quot;</span>
                     <span class="k">raise</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXException</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="c1"># Check planarity</span>
@@ -998,7 +1027,7 @@
                     <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counted_half_edges</span><span class="p">:</span>
                         <span class="c1"># We encountered a new face</span>
                         <span class="n">num_faces</span> <span class="o">+=</span> <span class="mi">1</span>
-                        <span class="c1"># Mark all half edges belonging to this face</span>
+                        <span class="c1"># Mark all half-edges belonging to this face</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">traverse_face</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">counted_half_edges</span><span class="p">)</span>
             <span class="n">num_edges</span> <span class="o">=</span> <span class="n">num_half_edges</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># num_half_edges is even</span>
             <span class="k">if</span> <span class="n">num_nodes</span> <span class="o">-</span> <span class="n">num_edges</span> <span class="o">+</span> <span class="n">num_faces</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
@@ -1011,7 +1040,7 @@
 <div class="viewcode-block" id="PlanarEmbedding.add_half_edge_ccw"><a class="viewcode-back" href="../../../reference/algorithms/planarity.html#networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_ccw">[docs]</a>    <span class="k">def</span> <span class="nf">add_half_edge_ccw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">,</span> <span class="n">reference_neighbor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Adds a half-edge from start_node to end_node.</span>
 
-<span class="sd">        The half edge is added counter clockwise next to the existing half edge</span>
+<span class="sd">        The half-edge is added counter clockwise next to the existing half-edge</span>
 <span class="sd">        (start_node, reference_neighbor).</span>
 
 <span class="sd">        Parameters</span>
@@ -1025,7 +1054,7 @@
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
-<span class="sd">        nx.NetworkxException</span>
+<span class="sd">        nx.NetworkXException</span>
 <span class="sd">            If the reference_neighbor does not exist</span>
 
 <span class="sd">        See Also</span>
@@ -1045,14 +1074,15 @@
             <span class="n">ccw_reference</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">start_node</span><span class="p">][</span><span class="n">reference_neighbor</span><span class="p">][</span><span class="s1">&#39;ccw&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_half_edge_cw</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">,</span> <span class="n">ccw_reference</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">reference_neighbor</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;first_nbr&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">reference_neighbor</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;first_nbr&#39;</span><span class="p">,</span>
+                                                                <span class="kc">None</span><span class="p">):</span>
                 <span class="c1"># Update first neighbor</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">start_node</span><span class="p">][</span><span class="s1">&#39;first_nbr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_node</span></div>
 
 <div class="viewcode-block" id="PlanarEmbedding.add_half_edge_cw"><a class="viewcode-back" href="../../../reference/algorithms/planarity.html#networkx.algorithms.planarity.PlanarEmbedding.add_half_edge_cw">[docs]</a>    <span class="k">def</span> <span class="nf">add_half_edge_cw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">,</span> <span class="n">reference_neighbor</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Adds a half edge from start_node to end_node.</span>
+        <span class="sd">&quot;&quot;&quot;Adds a half-edge from start_node to end_node.</span>
 
-<span class="sd">        The half edge is added clockwise next to the existing half edge</span>
+<span class="sd">        The half-edge is added clockwise next to the existing half-edge</span>
 <span class="sd">        (start_node, reference_neighbor).</span>
 
 <span class="sd">        Parameters</span>
@@ -1066,7 +1096,7 @@
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
-<span class="sd">        nx.NetworkxException</span>
+<span class="sd">        nx.NetworkXException</span>
 <span class="sd">            If the reference_neighbor does not exist</span>
 
 <span class="sd">        See Also</span>
@@ -1088,9 +1118,9 @@
             <span class="k">raise</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXException</span><span class="p">(</span>
                 <span class="s2">&quot;Cannot add edge. Reference neighbor does not exist&quot;</span><span class="p">)</span>
 
-        <span class="c1"># Get half edge at the other side</span>
+        <span class="c1"># Get half-edge at the other side</span>
         <span class="n">cw_reference</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">start_node</span><span class="p">][</span><span class="n">reference_neighbor</span><span class="p">][</span><span class="s1">&#39;cw&#39;</span><span class="p">]</span>
-        <span class="c1"># Alter half edge data structures</span>
+        <span class="c1"># Alter half-edge data structures</span>
         <span class="bp">self</span><span class="p">[</span><span class="n">start_node</span><span class="p">][</span><span class="n">reference_neighbor</span><span class="p">][</span><span class="s1">&#39;cw&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_node</span>
         <span class="bp">self</span><span class="p">[</span><span class="n">start_node</span><span class="p">][</span><span class="n">end_node</span><span class="p">][</span><span class="s1">&#39;cw&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cw_reference</span>
         <span class="bp">self</span><span class="p">[</span><span class="n">start_node</span><span class="p">][</span><span class="n">cw_reference</span><span class="p">][</span><span class="s1">&#39;ccw&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_node</span>
@@ -1103,8 +1133,8 @@
 <span class="sd">        components, or it might break the embedding.</span>
 <span class="sd">        This especially meas that if `connect_components(v, w)` is called it is</span>
 <span class="sd">        not allowed to call `connect_components(w, v)` afterwards.</span>
-<span class="sd">        The neighbor orientations in both directions are all set correctly after</span>
-<span class="sd">        the first call.</span>
+<span class="sd">        The neighbor orientations in both directions are all set correctly</span>
+<span class="sd">        after the first call.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1158,23 +1188,23 @@
         <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">new_node</span></div>
 
 <div class="viewcode-block" id="PlanarEmbedding.traverse_face"><a class="viewcode-back" href="../../../reference/algorithms/planarity.html#networkx.algorithms.planarity.PlanarEmbedding.traverse_face">[docs]</a>    <span class="k">def</span> <span class="nf">traverse_face</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">mark_half_edges</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns nodes on the face that belong to the half edge (v, w)</span>
+        <span class="sd">&quot;&quot;&quot;Returns nodes on the face that belong to the half-edge (v, w)</span>
 
-<span class="sd">        The face that is traversed lies to the right of the half edge (in an</span>
+<span class="sd">        The face that is traversed lies to the right of the half-edge (in an</span>
 <span class="sd">        orientation where v is below w).</span>
 
 <span class="sd">        Optionally it is possible to pass a set in which all encountered half</span>
-<span class="sd">        edges are added. Before calling this method, this set must not include any</span>
-<span class="sd">        half-edges that belong to the face.</span>
+<span class="sd">        edges are added. Before calling this method, this set must not include</span>
+<span class="sd">        any half-edges that belong to the face.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        v : node</span>
-<span class="sd">            Start node of half edge</span>
+<span class="sd">            Start node of half-edge</span>
 <span class="sd">        w : node</span>
-<span class="sd">            End node of half edge</span>
+<span class="sd">            End node of half-edge</span>
 <span class="sd">        mark_half_edges: set, optional</span>
-<span class="sd">            Set to which all encountered half edges are added</span>
+<span class="sd">            Set to which all encountered half-edges are added</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1188,7 +1218,7 @@
         <span class="n">mark_half_edges</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
         <span class="n">prev_node</span> <span class="o">=</span> <span class="n">v</span>
         <span class="n">cur_node</span> <span class="o">=</span> <span class="n">w</span>
-        <span class="c1"># Last half edge is (incoming_node, v)</span>
+        <span class="c1"># Last half-edge is (incoming_node, v)</span>
         <span class="n">incoming_node</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">w</span><span class="p">][</span><span class="s1">&#39;cw&#39;</span><span class="p">]</span>
 
         <span class="k">while</span> <span class="n">cur_node</span> <span class="o">!=</span> <span class="n">v</span> <span class="ow">or</span> <span class="n">prev_node</span> <span class="o">!=</span> <span class="n">incoming_node</span><span class="p">:</span>
@@ -1202,10 +1232,11 @@
         <span class="k">return</span> <span class="n">face_nodes</span></div>
 
 <div class="viewcode-block" id="PlanarEmbedding.is_directed"><a class="viewcode-back" href="../../../reference/algorithms/planarity.html#networkx.algorithms.planarity.PlanarEmbedding.is_directed">[docs]</a>    <span class="k">def</span> <span class="nf">is_directed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The graph is undirected if it is valid.</span>
+        <span class="sd">&quot;&quot;&quot;A valid PlanarEmbedding is undirected.</span>
 
-<span class="sd">        All reverse edges are contained, i.e. for every existing half edge (v, w)</span>
-<span class="sd">        the half edge in the opposite direction (w, v) is also contained.</span>
+<span class="sd">        All reverse edges are contained, i.e. for every existing</span>
+<span class="sd">        half-edge (v, w) the half-edge in the opposite direction (w, v) is also</span>
+<span class="sd">        contained.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">False</span></div></div>
 </pre></div>
@@ -1243,7 +1274,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180805142449',
+            VERSION:'2.2rc1.dev20180805150714',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
