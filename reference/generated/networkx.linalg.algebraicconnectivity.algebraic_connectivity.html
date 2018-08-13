@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.linalg.algebraicconnectivity.algebraic_connectivity &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
+  <title>networkx.linalg.algebraicconnectivity.algebraic_connectivity &mdash; NetworkX 2.2rc1.dev20180813182339 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180813182339 documentation"
             href="../../_static/opensearch.xml"/>
     
 
@@ -34,7 +34,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="networkx.linalg.algebraicconnectivity.fiedler_vector" href="networkx.linalg.algebraicconnectivity.fiedler_vector.html" />
-    <link rel="prev" title="networkx.linalg.spectrum.adjacency_spectrum" href="networkx.linalg.spectrum.adjacency_spectrum.html" /> 
+    <link rel="prev" title="networkx.linalg.spectrum.modularity_spectrum" href="networkx.linalg.spectrum.modularity_spectrum.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805190014
+                2.2rc1.dev_20180813182339
               </div>
             
           
@@ -107,12 +107,14 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../linalg.html#module-networkx.linalg.attrmatrix">Attribute Matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linalg.html#module-networkx.linalg.modularitymatrix">Modularity Matrices</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../convert.html">Converting to and from other data formats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../relabel.html">Relabeling nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readwrite/index.html">Reading and writing graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../randomness.html">Randomness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../glossary.html">Glossary</a></li>
@@ -195,7 +197,7 @@
 <h1>networkx.linalg.algebraicconnectivity.algebraic_connectivity<a class="headerlink" href="#networkx-linalg-algebraicconnectivity-algebraic-connectivity" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="networkx.linalg.algebraicconnectivity.algebraic_connectivity">
-<code class="descname">algebraic_connectivity</code><span class="sig-paren">(</span><em>G</em>, <em>weight='weight'</em>, <em>normalized=False</em>, <em>tol=1e-08</em>, <em>method='tracemin_pcg'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/networkx/linalg/algebraicconnectivity.html#algebraic_connectivity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.linalg.algebraicconnectivity.algebraic_connectivity" title="Permalink to this definition">¶</a></dt>
+<code class="descname">algebraic_connectivity</code><span class="sig-paren">(</span><em>G</em>, <em>weight='weight'</em>, <em>normalized=False</em>, <em>tol=1e-08</em>, <em>method='tracemin_pcg'</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/networkx/linalg/algebraicconnectivity.html#algebraic_connectivity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.linalg.algebraicconnectivity.algebraic_connectivity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the algebraic connectivity of an undirected graph.</p>
 <p>The algebraic connectivity of a connected undirected graph is the second
 smallest eigenvalue of its Laplacian matrix.</p>
@@ -241,6 +243,9 @@ values allow specifying the solver to be used.</p>
 </tbody>
 </table>
 </li>
+<li><p class="first"><strong>seed</strong> (<em>integer, random_state, or None (default)</em>) – Indicator of random number generation state.
+See <a class="reference internal" href="../randomness.html#randomness"><span class="std std-ref">Randomness</span></a>.</p>
+</li>
 </ul>
 </td>
 </tr>
@@ -282,7 +287,7 @@ weights of parallel edges are summed. Zero-weighted edges are ignored.</p>
         <a href="networkx.linalg.algebraicconnectivity.fiedler_vector.html" class="btn btn-neutral float-right" title="networkx.linalg.algebraicconnectivity.fiedler_vector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="networkx.linalg.spectrum.adjacency_spectrum.html" class="btn btn-neutral" title="networkx.linalg.spectrum.adjacency_spectrum" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="networkx.linalg.spectrum.modularity_spectrum.html" class="btn btn-neutral" title="networkx.linalg.spectrum.modularity_spectrum" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -292,7 +297,7 @@ weights of parallel edges are summed. Zero-weighted edges are ignored.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 05, 2018.
+      Last updated on Aug 13, 2018.
 
     </p>
   </div>
@@ -314,7 +319,7 @@ weights of parallel edges are summed. Zero-weighted edges are ignored.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.2rc1.dev20180805190014',
+            VERSION:'2.2rc1.dev20180813182339',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

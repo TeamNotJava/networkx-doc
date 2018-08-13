@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.DiGraph.copy &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
+  <title>networkx.DiGraph.copy &mdash; NetworkX 2.2rc1.dev20180813182339 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180813182339 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805190014
+                2.2rc1.dev_20180813182339
               </div>
             
           
@@ -102,6 +102,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../ordered.html">Ordered Graphs—Consistently ordered graphs</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#module-networkx.classes.graphviews">Graph Views</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../algorithms/index.html">Algorithms</a></li>
@@ -112,6 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../relabel.html">Relabeling nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../readwrite/index.html">Reading and writing graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../randomness.html">Randomness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../exceptions.html">Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
@@ -196,7 +198,7 @@
 <h1>networkx.DiGraph.copy<a class="headerlink" href="#networkx-digraph-copy" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="networkx.DiGraph.copy">
-<code class="descclassname">DiGraph.</code><code class="descname">copy</code><span class="sig-paren">(</span><em>as_view=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/networkx/classes/digraph.html#DiGraph.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.DiGraph.copy" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">DiGraph.</code><code class="descname">copy</code><span class="sig-paren">(</span><em>as_view=False</em><span class="sig-paren">)</span><a class="headerlink" href="#networkx.DiGraph.copy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a copy of the graph.</p>
 <p>The copy method by default returns an independent shallow copy
 of the graph and attributes. That is, if an attribute is a
@@ -226,14 +228,14 @@ You can obtain this style copy using:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">as_view</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">fresh_copy</span><span class="p">()</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Fresh Data – For fresh data, the graph structure is copied while
 new empty data attribute dicts are created. The resulting graph
 is independent of the original and it has no edge, node or graph
 attributes. Fresh copies are not enabled. Instead use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">fresh_copy</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">)</span>
 </pre></div>
@@ -293,7 +295,7 @@ of the original graph without actually copying any data.</td>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 05, 2018.
+      Last updated on Aug 13, 2018.
 
     </p>
   </div>
@@ -315,7 +317,7 @@ of the original graph without actually copying any data.</td>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180805190014',
+            VERSION:'2.2rc1.dev20180813182339',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

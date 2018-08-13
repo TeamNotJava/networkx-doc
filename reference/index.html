@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reference &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
+  <title>Reference &mdash; NetworkX 2.2rc1.dev20180813182339 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180813182339 documentation"
             href="../_static/opensearch.xml"/>
     
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805190014
+                2.2rc1.dev_20180813182339
               </div>
             
           
@@ -101,6 +101,7 @@
 <li class="toctree-l2"><a class="reference internal" href="relabel.html">Relabeling nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readwrite/index.html">Reading and writing graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="randomness.html">Randomness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
@@ -182,9 +183,9 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">2.2rc1.dev20180805190014</td>
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">2.2rc1.dev20180813182339</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Aug 05, 2018</td>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Aug 13, 2018</td>
 </tr>
 </tbody>
 </table>
@@ -204,6 +205,7 @@
 <li class="toctree-l1"><a class="reference internal" href="classes/index.html">Graph types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="classes/index.html#which-graph-class-should-i-use">Which graph class should I use?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/index.html#basic-graph-types">Basic graph types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/index.html#module-networkx.classes.graphviews">Graph Views</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="algorithms/index.html">Algorithms</a><ul>
@@ -242,16 +244,21 @@
 <li class="toctree-l2"><a class="reference internal" href="algorithms/isomorphism.html">Isomorphism</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/link_analysis.html">Link Analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/link_prediction.html">Link Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/lowest_common_ancestors.html">Lowest Common Ancestor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/matching.html">Matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/minors.html">Minors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/mis.html">Maximal independent set</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/node_classification.html">Node Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/operators.html">Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/planarity.html">Planarity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/planar_drawing.html">Planar Drawing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/reciprocity.html">Reciprocity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/rich_club.html">Rich Club</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/shortest_paths.html">Shortest Paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/similarity.html">Similarity Measures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/simple_paths.html">Simple Paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/smallworld.html">Similarity Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/smetric.html">s metric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/structuralholes.html">Structural holes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/swap.html">Swap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/tournament.html">Tournament</a></li>
@@ -290,6 +297,7 @@
 <li class="toctree-l2"><a class="reference internal" href="generators.html#module-networkx.generators.intersection">Intersection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators.html#module-networkx.generators.social">Social Networks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators.html#module-networkx.generators.community">Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html#module-networkx.generators.spectral_graph_forge">Spectral</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators.html#module-networkx.generators.trees">Trees</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators.html#module-networkx.generators.nonisomorphic_trees">Non Isomorphic Trees</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators.html#module-networkx.generators.triads">Triads</a></li>
@@ -303,6 +311,7 @@
 <li class="toctree-l2"><a class="reference internal" href="linalg.html#module-networkx.linalg.spectrum">Spectrum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linalg.html#module-networkx.linalg.algebraicconnectivity">Algebraic Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linalg.html#module-networkx.linalg.attrmatrix">Attribute Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linalg.html#module-networkx.linalg.modularitymatrix">Modularity Matrices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="convert.html">Converting to and from other data formats</a><ul>
@@ -341,6 +350,7 @@
 <li class="toctree-l2"><a class="reference internal" href="drawing.html#module-networkx.drawing.layout">Graph Layout</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="randomness.html">Randomness</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="exceptions.html#id1">Exceptions</a></li>
 </ul>
@@ -380,7 +390,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 05, 2018.
+      Last updated on Aug 13, 2018.
 
     </p>
   </div>
@@ -402,7 +412,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.2rc1.dev20180805190014',
+            VERSION:'2.2rc1.dev20180813182339',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.algorithms.traversal.breadth_first_search.bfs_tree &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
+  <title>networkx.algorithms.traversal.breadth_first_search.bfs_tree &mdash; NetworkX 2.2rc1.dev20180813182339 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180813182339 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805190014
+                2.2rc1.dev_20180813182339
               </div>
             
           
@@ -129,16 +129,21 @@
 <li class="toctree-l3"><a class="reference internal" href="../isomorphism.html">Isomorphism</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../link_analysis.html">Link Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../link_prediction.html">Link Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lowest_common_ancestors.html">Lowest Common Ancestor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../matching.html">Matching</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../minors.html">Minors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mis.html">Maximal independent set</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../node_classification.html">Node Classification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operators.html">Operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../planarity.html">Planarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../planar_drawing.html">Planar Drawing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reciprocity.html">Reciprocity</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../rich_club.html">Rich Club</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../shortest_paths.html">Shortest Paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../similarity.html">Similarity Measures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../simple_paths.html">Simple Paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../smallworld.html">Similarity Measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../smetric.html">s metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../structuralholes.html">Structural holes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../swap.html">Swap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tournament.html">Tournament</a></li>
@@ -147,6 +152,7 @@
 <li class="toctree-l4 current"><a class="reference internal" href="../traversal.html#module-networkx.algorithms.traversal.breadth_first_search">Breadth First Search</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../traversal.html#module-networkx.algorithms.traversal.beamsearch">Beam search</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../traversal.html#module-networkx.algorithms.traversal.edgedfs">Depth First Search on Edges</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../traversal.html#id3">Depth First Search on Edges</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../tree.html">Tree</a></li>
@@ -163,6 +169,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../relabel.html">Relabeling nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../readwrite/index.html">Reading and writing graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../randomness.html">Randomness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../exceptions.html">Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
@@ -247,7 +254,7 @@
 <h1>networkx.algorithms.traversal.breadth_first_search.bfs_tree<a class="headerlink" href="#networkx-algorithms-traversal-breadth-first-search-bfs-tree" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="networkx.algorithms.traversal.breadth_first_search.bfs_tree">
-<code class="descname">bfs_tree</code><span class="sig-paren">(</span><em>G</em>, <em>source</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/networkx/algorithms/traversal/breadth_first_search.html#bfs_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.traversal.breadth_first_search.bfs_tree" title="Permalink to this definition">¶</a></dt>
+<code class="descname">bfs_tree</code><span class="sig-paren">(</span><em>G</em>, <em>source</em>, <em>reverse=False</em>, <em>depth_limit=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/networkx/algorithms/traversal/breadth_first_search.html#bfs_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.traversal.breadth_first_search.bfs_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an oriented tree constructed from of a breadth-first-search
 starting at source.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -259,6 +266,7 @@ starting at source.</p>
 <li><strong>source</strong> (<em>node</em>) – Specify starting node for breadth-first search and return edges in
 the component reachable from source.</li>
 <li><strong>reverse</strong> (<em>bool, optional</em>) – If True traverse a directed graph in the reverse direction</li>
+<li><strong>depth_limit</strong> (<em>int, optional(default=len(G))</em>) – Specify the maximum search depth</li>
 </ul>
 </td>
 </tr>
@@ -274,11 +282,18 @@ the component reachable from source.</li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">path_graph</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">bfs_tree</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">edges</span><span class="p">()))</span>
 <span class="go">[(1, 0), (1, 2)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">bfs_tree</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">edges</span><span class="p">())))</span>
+<span class="go">[(1, 0), (2, 1), (2, 7), (3, 2), (3, 4), (4, 5), (5, 6), (7, 8)]</span>
 </pre></div>
 </div>
 <p class="rubric">Notes</p>
 <p>Based on <a class="reference external" href="http://www.ics.uci.edu/~eppstein/PADS/BFS.py">http://www.ics.uci.edu/~eppstein/PADS/BFS.py</a>
-by D. Eppstein, July 2004.</p>
+by D. Eppstein, July 2004. The modifications
+to allow depth limits based on the Wikipedia article
+“<a class="reference external" href="https://en.wikipedia.org/wiki/Depth-limited_search">Depth-limited-search</a>”.</p>
 </dd></dl>
 
 </div>
@@ -304,7 +319,7 @@ by D. Eppstein, July 2004.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 05, 2018.
+      Last updated on Aug 13, 2018.
 
     </p>
   </div>
@@ -326,7 +341,7 @@ by D. Eppstein, July 2004.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180805190014',
+            VERSION:'2.2rc1.dev20180813182339',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

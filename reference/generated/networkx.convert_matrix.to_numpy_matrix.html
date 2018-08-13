@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.convert_matrix.to_numpy_matrix &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
+  <title>networkx.convert_matrix.to_numpy_matrix &mdash; NetworkX 2.2rc1.dev20180813182339 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180813182339 documentation"
             href="../../_static/opensearch.xml"/>
     
 
@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="networkx.convert_matrix.to_numpy_recarray" href="networkx.convert_matrix.to_numpy_recarray.html" />
+    <link rel="next" title="networkx.convert_matrix.to_numpy_array" href="networkx.convert_matrix.to_numpy_array.html" />
     <link rel="prev" title="networkx.convert.from_edgelist" href="networkx.convert.from_edgelist.html" /> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805190014
+                2.2rc1.dev_20180813182339
               </div>
             
           
@@ -103,8 +103,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../convert.html#lists">Lists</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../convert.html#module-networkx.convert_matrix">Numpy</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">networkx.convert_matrix.to_numpy_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networkx.convert_matrix.to_numpy_array.html">networkx.convert_matrix.to_numpy_array</a></li>
 <li class="toctree-l4"><a class="reference internal" href="networkx.convert_matrix.to_numpy_recarray.html">networkx.convert_matrix.to_numpy_recarray</a></li>
 <li class="toctree-l4"><a class="reference internal" href="networkx.convert_matrix.from_numpy_matrix.html">networkx.convert_matrix.from_numpy_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networkx.convert_matrix.from_numpy_array.html">networkx.convert_matrix.from_numpy_array</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../convert.html#scipy">Scipy</a></li>
@@ -114,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../relabel.html">Relabeling nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readwrite/index.html">Reading and writing graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../randomness.html">Randomness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../glossary.html">Glossary</a></li>
@@ -251,6 +254,10 @@ diagonal matrix entry value to the weight attribute of the edge
 alternate convention of doubling the edge weight is desired the
 resulting Numpy matrix can be modified as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">legacy</span><span class="o">=</span><span class="s2">&quot;1.13&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="k">pass</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
@@ -288,7 +295,7 @@ resulting Numpy matrix can be modified as follows:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="networkx.convert_matrix.to_numpy_recarray.html" class="btn btn-neutral float-right" title="networkx.convert_matrix.to_numpy_recarray" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="networkx.convert_matrix.to_numpy_array.html" class="btn btn-neutral float-right" title="networkx.convert_matrix.to_numpy_array" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="networkx.convert.from_edgelist.html" class="btn btn-neutral" title="networkx.convert.from_edgelist" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -301,7 +308,7 @@ resulting Numpy matrix can be modified as follows:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 05, 2018.
+      Last updated on Aug 13, 2018.
 
     </p>
   </div>
@@ -323,7 +330,7 @@ resulting Numpy matrix can be modified as follows:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.2rc1.dev20180805190014',
+            VERSION:'2.2rc1.dev20180813182339',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

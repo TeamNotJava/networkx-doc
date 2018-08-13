@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.drawing.nx_pylab &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
+  <title>networkx.drawing.nx_pylab &mdash; NetworkX 2.2rc1.dev20180813182339 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180813182339 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805190014
+                2.2rc1.dev_20180813182339
               </div>
             
           
@@ -186,7 +186,7 @@
 <span class="kn">from</span> <span class="nn">networkx.utils</span> <span class="k">import</span> <span class="n">is_string_like</span>
 <span class="kn">from</span> <span class="nn">networkx.drawing.layout</span> <span class="k">import</span> <span class="n">shell_layout</span><span class="p">,</span> \
     <span class="n">circular_layout</span><span class="p">,</span> <span class="n">kamada_kawai_layout</span><span class="p">,</span> <span class="n">spectral_layout</span><span class="p">,</span> \
-    <span class="n">spring_layout</span><span class="p">,</span> <span class="n">random_layout</span>
+    <span class="n">spring_layout</span><span class="p">,</span> <span class="n">random_layout</span><span class="p">,</span> <span class="n">planar_layout</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;draw&#39;</span><span class="p">,</span>
            <span class="s1">&#39;draw_networkx&#39;</span><span class="p">,</span>
@@ -199,6 +199,7 @@
            <span class="s1">&#39;draw_random&#39;</span><span class="p">,</span>
            <span class="s1">&#39;draw_spectral&#39;</span><span class="p">,</span>
            <span class="s1">&#39;draw_spring&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;draw_planar&#39;</span><span class="p">,</span>
            <span class="s1">&#39;draw_shell&#39;</span><span class="p">]</span>
 
 
@@ -1217,6 +1218,22 @@
     <span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">nlist</span><span class="o">=</span><span class="n">nlist</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="draw_planar"><a class="viewcode-back" href="../../../reference/generated/networkx.drawing.nx_pylab.draw_planar.html#networkx.drawing.nx_pylab.draw_planar">[docs]</a><span class="k">def</span> <span class="nf">draw_planar</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Draw a planar networkx graph with planar layout.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : graph</span>
+<span class="sd">       A planar networkx graph</span>
+
+<span class="sd">    kwargs : optional keywords</span>
+<span class="sd">       See networkx.draw_networkx() for a description of optional keywords,</span>
+<span class="sd">       with the exception of the pos parameter which is not used by this</span>
+<span class="sd">       function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">planar_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
 <span class="k">def</span> <span class="nf">apply_alpha</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">elem_list</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply an alpha (or list of alphas) to the colors provided.</span>
 
@@ -1320,7 +1337,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 05, 2018.
+      Last updated on Aug 13, 2018.
 
     </p>
   </div>
@@ -1342,7 +1359,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180805190014',
+            VERSION:'2.2rc1.dev20180813182339',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

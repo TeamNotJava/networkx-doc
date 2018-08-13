@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.readwrite.graphml.write_graphml &mdash; NetworkX 2.2rc1.dev20180805190014 documentation</title>
+  <title>networkx.readwrite.graphml.write_graphml &mdash; NetworkX 2.2rc1.dev20180813182339 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180805190014 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180813182339 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="JSON" href="../json_graph.html" />
+    <link rel="next" title="networkx.readwrite.graphml.generate_graphml" href="networkx.readwrite.graphml.generate_graphml.html" />
     <link rel="prev" title="networkx.readwrite.graphml.read_graphml" href="networkx.readwrite.graphml.read_graphml.html" /> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180805190014
+                2.2rc1.dev_20180813182339
               </div>
             
           
@@ -110,6 +110,8 @@
 <li class="toctree-l4"><a class="reference internal" href="../graphml.html#id1">GraphML</a></li>
 <li class="toctree-l4"><a class="reference internal" href="networkx.readwrite.graphml.read_graphml.html">networkx.readwrite.graphml.read_graphml</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">networkx.readwrite.graphml.write_graphml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networkx.readwrite.graphml.generate_graphml.html">networkx.readwrite.graphml.generate_graphml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networkx.readwrite.graphml.parse_graphml.html">networkx.readwrite.graphml.parse_graphml</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../json_graph.html">JSON</a></li>
@@ -121,6 +123,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../randomness.html">Randomness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../exceptions.html">Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
@@ -207,6 +210,8 @@
 <dt id="networkx.readwrite.graphml.write_graphml">
 <code class="descname">write_graphml</code><span class="sig-paren">(</span><em>G</em>, <em>path</em>, <em>encoding='utf-8'</em>, <em>prettyprint=True</em>, <em>infer_numeric_types=False</em><span class="sig-paren">)</span><a class="headerlink" href="#networkx.readwrite.graphml.write_graphml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write G in GraphML XML format to path</p>
+<p>This function uses the LXML framework and should be faster than
+the version using the xml library.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -227,13 +232,10 @@ we infer in GraphML that both are floats.</li>
 </table>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">path_graph</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="o">.</span><span class="n">write_graphml</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s2">&quot;test.graphml&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="o">.</span><span class="n">write_graphml_lxml</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s2">&quot;fourpath.graphml&quot;</span><span class="p">)</span>  
 </pre></div>
 </div>
 <p class="rubric">Notes</p>
-<p>It may be a good idea in Python2 to convert strings to unicode
-before giving the graph to write_gml. At least the strings with
-either many characters to escape.</p>
 <p>This implementation does not support mixed graphs (directed
 and unidirected edges together) hyperedges, nested graphs, or ports.</p>
 </dd></dl>
@@ -248,7 +250,7 @@ and unidirected edges together) hyperedges, nested graphs, or ports.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../json_graph.html" class="btn btn-neutral float-right" title="JSON" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="networkx.readwrite.graphml.generate_graphml.html" class="btn btn-neutral float-right" title="networkx.readwrite.graphml.generate_graphml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="networkx.readwrite.graphml.read_graphml.html" class="btn btn-neutral" title="networkx.readwrite.graphml.read_graphml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -261,7 +263,7 @@ and unidirected edges together) hyperedges, nested graphs, or ports.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 05, 2018.
+      Last updated on Aug 13, 2018.
 
     </p>
   </div>
@@ -283,7 +285,7 @@ and unidirected edges together) hyperedges, nested graphs, or ports.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180805190014',
+            VERSION:'2.2rc1.dev20180813182339',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
