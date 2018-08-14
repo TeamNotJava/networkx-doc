@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.algorithms.planar_drawing &mdash; NetworkX 2.2rc1.dev20180813182339 documentation</title>
+  <title>networkx.algorithms.planar_drawing &mdash; NetworkX 2.2rc1.dev20180814091355 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180813182339 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180814091355 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180813182339
+                2.2rc1.dev_20180814091355
               </div>
             
           
@@ -175,13 +175,20 @@
 <span class="sd">        This defines the order of the edges</span>
 
 <span class="sd">    fully_triangulate : bool</span>
-<span class="sd">        If set to True the algorithm will adds edges to a copy of the input</span>
-<span class="sd">        graph such that it is chordal.</span>
+<span class="sd">        If set to True the algorithm adds edges to a copy of the input</span>
+<span class="sd">        embedding and makes it chordal.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pos : dict</span>
 <span class="sd">        Maps each node to a tuple that defines the (x, y) position</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] M. Chrobak and T.H. Payne:</span>
+<span class="sd">        A Linear-time Algorithm for Drawing a Planar Graph on a Grid 1989</span>
+<span class="sd">        http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.51.6677</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
         <span class="c1"># Position the node in any triangle</span>
@@ -298,6 +305,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    node_list : list</span>
 <span class="sd">        All nodes ordered by the canonical ordering</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Steven Chaplick.</span>
+<span class="sd">        Canonical Orders of Planar Graphs and (some of) Their Applications 2015</span>
+<span class="sd">        https://wuecampus2.uni-wuerzburg.de/moodle/pluginfile.php/545727/mod_resource/content/0/vg-ss15-vl03-canonical-orders-druckversion.pdf</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">v1</span> <span class="o">=</span> <span class="n">outer_face</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">v2</span> <span class="o">=</span> <span class="n">outer_face</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -574,34 +587,6 @@
         <span class="n">edges_counted</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">face_list</span>
-
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="mi">50</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="mf">1.0</span>
-        <span class="n">is_planar</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="n">is_planar</span><span class="p">:</span>
-            <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">fast_gnp_random_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-            <span class="n">is_planar</span><span class="p">,</span> <span class="n">embedding</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">check_planarity</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-            <span class="n">p</span> <span class="o">*=</span> <span class="mf">0.99</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Embedding: &quot;</span><span class="p">,</span> <span class="n">embedding</span><span class="o">.</span><span class="n">get_data</span><span class="p">())</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Displaying not fully triangulated drawing&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">nx</span><span class="o">.</span><span class="n">draw_planar</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-        <span class="n">pos</span> <span class="o">=</span> <span class="n">combinatorial_embedding_to_pos</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">fully_triangulate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Displaying fully triangulated drawing&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
            </div>
@@ -615,7 +600,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 13, 2018.
+      Last updated on Aug 14, 2018.
 
     </p>
   </div>
@@ -637,7 +622,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180813182339',
+            VERSION:'2.2rc1.dev20180814091355',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
