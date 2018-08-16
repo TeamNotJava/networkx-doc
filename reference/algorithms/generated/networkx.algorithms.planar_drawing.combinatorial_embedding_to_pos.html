@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.algorithms.planar_drawing.combinatorial_embedding_to_pos &mdash; NetworkX 2.2rc1.dev20180814091355 documentation</title>
+  <title>networkx.algorithms.planar_drawing.combinatorial_embedding_to_pos &mdash; NetworkX 2.2rc1.dev20180816183810 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180814091355 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180816183810 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180814091355
+                2.2rc1.dev_20180816183810
               </div>
             
           
@@ -252,6 +252,11 @@
 <dt id="networkx.algorithms.planar_drawing.combinatorial_embedding_to_pos">
 <code class="descname">combinatorial_embedding_to_pos</code><span class="sig-paren">(</span><em>embedding</em>, <em>fully_triangulate=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/networkx/algorithms/planar_drawing.html#combinatorial_embedding_to_pos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.planar_drawing.combinatorial_embedding_to_pos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assigns every node a (x, y) position based on the given embedding</p>
+<p>The algorithm iteratively inserts nodes of the input graph in a certain
+order and rearranges previously inserted nodes so that the planar drawing
+stays valid. This is done efficiently by only maintaining relative
+positions during the node placements and calculating the absolute positions
+at the end. For more information see <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -272,10 +277,10 @@ embedding and makes it chordal.</li>
 </tbody>
 </table>
 <p class="rubric">References</p>
-<table class="docutils footnote" frame="void" id="id1" rules="none">
+<table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td>M. Chrobak and T.H. Payne:
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>M. Chrobak and T.H. Payne:
 A Linear-time Algorithm for Drawing a Planar Graph on a Grid 1989
 <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.51.6677">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.51.6677</a></td></tr>
 </tbody>
@@ -305,7 +310,7 @@ A Linear-time Algorithm for Drawing a Planar Graph on a Grid 1989
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 14, 2018.
+      Last updated on Aug 16, 2018.
 
     </p>
   </div>
@@ -327,7 +332,7 @@ A Linear-time Algorithm for Drawing a Planar Graph on a Grid 1989
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180814091355',
+            VERSION:'2.2rc1.dev20180816183810',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>networkx.algorithms.planar_drawing.get_canonical_ordering &mdash; NetworkX 2.2rc1.dev20180816183810 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml"
+            title="Search within NetworkX 2.2rc1.dev20180816183810 documentation"
+            href="../../../_static/opensearch.xml"/>
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> NetworkX
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2rc1.dev_20180816183810
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">NetworkX</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>networkx.algorithms.planar_drawing.get_canonical_ordering</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="networkx-algorithms-planar-drawing-get-canonical-ordering">
+<h1>networkx.algorithms.planar_drawing.get_canonical_ordering<a class="headerlink" href="#networkx-algorithms-planar-drawing-get-canonical-ordering" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="networkx.algorithms.planar_drawing.get_canonical_ordering">
+<code class="descname">get_canonical_ordering</code><span class="sig-paren">(</span><em>embedding</em>, <em>outer_face</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/networkx/algorithms/planar_drawing.html#get_canonical_ordering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#networkx.algorithms.planar_drawing.get_canonical_ordering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a canonical ordering of the nodes</p>
+<p>The canonical ordering of nodes (v1, …, vn) must fulfill the following
+conditions:
+(See Lemma 1 in <a class="footnote-reference" href="#id4" id="id1">[2]</a>)</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>For the subgraph G_k of the input graph induced by v1, …, vk it holds:</dt>
+<dd><ul class="first last">
+<li>2-connected</li>
+<li>internally triangulated</li>
+<li>the edge (v1, v2) is part of the outer face</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>For a node v(k+1) the following holds:</dt>
+<dd><ul class="first last">
+<li>The node v(k+1) is part of the outer face of G_k</li>
+<li>It has at least two neighbors in G_k</li>
+<li>All neighbors of v(k+1) in G_k lie consecutively on the outer face of
+G_k (excluding the edge (v1, v2)).</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The algorithm used here starts with G_n (containing all nodes). It first
+selects the nodes v1 and v2. And then tries to find the order of the other
+nodes by checking which node can be removed in order to fulfill the
+conditions mentioned above. This is done by calculating the number of
+chords of nodes on the outer face. For more information see <a class="footnote-reference" href="#id3" id="id2">[1]</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>embedding</strong> (<em>nx.PlanarEmbedding</em>) – The embedding must be triangulated</li>
+<li><strong>outer_face</strong> (<em>list</em>) – The nodes on the outer face of the graph</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ordering</strong> – A list of tuples <code class="xref py py-obj docutils literal notranslate"><span class="pre">(vk,</span> <span class="pre">wp_wq)</span></code>. Here <code class="xref py py-obj docutils literal notranslate"><span class="pre">vk</span></code> is the node at this position
+in the canonical ordering. The element <code class="xref py py-obj docutils literal notranslate"><span class="pre">wp_wq</span></code> is a list of nodes that
+make up the outer face of G_k.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Steven Chaplick.
+Canonical Orders of Planar Graphs and (some of) Their Applications 2015
+<a class="reference external" href="https://wuecampus2.uni-wuerzburg.de/moodle/pluginfile.php/545727/mod_resource/content/0/vg-ss15-vl03-canonical-orders-druckversion.pdf">https://wuecampus2.uni-wuerzburg.de/moodle/pluginfile.php/545727/mod_resource/content/0/vg-ss15-vl03-canonical-orders-druckversion.pdf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td>M. Chrobak and T.H. Payne:
+A Linear-time Algorithm for Drawing a Planar Graph on a Grid 1989
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.51.6677">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.51.6677</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2004-2018, NetworkX Developers.
+      Last updated on Aug 16, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.2rc1.dev20180816183810',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

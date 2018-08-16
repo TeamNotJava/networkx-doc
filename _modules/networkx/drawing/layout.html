@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.drawing.layout &mdash; NetworkX 2.2rc1.dev20180814091355 documentation</title>
+  <title>networkx.drawing.layout &mdash; NetworkX 2.2rc1.dev20180816183810 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180814091355 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180816183810 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180814091355
+                2.2rc1.dev_20180816183810
               </div>
             
           
@@ -1019,14 +1019,29 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="n">index</span><span class="p">])</span>
 
 
-<div class="viewcode-block" id="planar_layout"><a class="viewcode-back" href="../../../reference/generated/networkx.drawing.layout.planar_layout.html#networkx.drawing.layout.planar_layout">[docs]</a><span class="k">def</span> <span class="nf">planar_layout</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<div class="viewcode-block" id="planar_layout"><a class="viewcode-back" href="../../../reference/generated/networkx.drawing.layout.planar_layout.html#networkx.drawing.layout.planar_layout">[docs]</a><span class="k">def</span> <span class="nf">planar_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Position nodes without edge intersections.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    G : NetworkX graph</span>
+<span class="sd">    G : NetworkX graph or list of nodes</span>
 <span class="sd">        A position will be assigned to every node in G. If G is of type</span>
 <span class="sd">        PlanarEmbedding, the positions are selected accordingly.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : NetworkX graph or list of nodes</span>
+<span class="sd">        A position will be assigned to every node in G. If G is of type</span>
+<span class="sd">        nx.PlanarEmbedding, the positions are selected accordingly.</span>
+
+<span class="sd">    scale : number (default: 1)</span>
+<span class="sd">        Scale factor for positions.</span>
+
+<span class="sd">    center : array-like or None</span>
+<span class="sd">        Coordinate pair around which to center the layout.</span>
+
+<span class="sd">    dim : int</span>
+<span class="sd">        Dimension of layout.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1043,6 +1058,16 @@
 <span class="sd">    &gt;&gt;&gt; G = nx.path_graph(4)</span>
 <span class="sd">    &gt;&gt;&gt; pos = nx.planar_layout(G)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+    <span class="k">if</span> <span class="n">dim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;can only handle 2 dimensions&#39;</span><span class="p">)</span>
+
+    <span class="n">G</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="n">_process_params</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">PlanarEmbedding</span><span class="p">):</span>
         <span class="n">embedding</span> <span class="o">=</span> <span class="n">G</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1050,7 +1075,11 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_planar</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXException</span><span class="p">(</span><span class="s2">&quot;G is not planar.&quot;</span><span class="p">)</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">combinatorial_embedding_to_pos</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">pos</span></div>
+    <span class="n">node_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">row_stack</span><span class="p">((</span><span class="n">pos</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">node_list</span><span class="p">))</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">rescale_layout</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span> <span class="o">+</span> <span class="n">center</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">node_list</span><span class="p">,</span> <span class="n">pos</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="rescale_layout"><a class="viewcode-back" href="../../../reference/generated/networkx.drawing.layout.rescale_layout.html#networkx.drawing.layout.rescale_layout">[docs]</a><span class="k">def</span> <span class="nf">rescale_layout</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -1115,7 +1144,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 14, 2018.
+      Last updated on Aug 16, 2018.
 
     </p>
   </div>
@@ -1137,7 +1166,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180814091355',
+            VERSION:'2.2rc1.dev20180816183810',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

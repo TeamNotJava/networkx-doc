@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>networkx.algorithms.planar_drawing &mdash; NetworkX 2.2rc1.dev20180814091355 documentation</title>
+  <title>networkx.algorithms.planar_drawing &mdash; NetworkX 2.2rc1.dev20180816183810 documentation</title>
   
 
   
@@ -22,7 +22,7 @@
   
     
       <link rel="search" type="application/opensearchdescription+xml"
-            title="Search within NetworkX 2.2rc1.dev20180814091355 documentation"
+            title="Search within NetworkX 2.2rc1.dev20180816183810 documentation"
             href="../../../_static/opensearch.xml"/>
     
 
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                2.2rc1.dev_20180814091355
+                2.2rc1.dev_20180816183810
               </div>
             
           
@@ -168,6 +168,12 @@
 
 <div class="viewcode-block" id="combinatorial_embedding_to_pos"><a class="viewcode-back" href="../../../reference/algorithms/generated/networkx.algorithms.planar_drawing.combinatorial_embedding_to_pos.html#networkx.algorithms.planar_drawing.combinatorial_embedding_to_pos">[docs]</a><span class="k">def</span> <span class="nf">combinatorial_embedding_to_pos</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">fully_triangulate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Assigns every node a (x, y) position based on the given embedding</span>
+
+<span class="sd">    The algorithm iteratively inserts nodes of the input graph in a certain</span>
+<span class="sd">    order and rearranges previously inserted nodes so that the planar drawing</span>
+<span class="sd">    stays valid. This is done efficiently by only maintaining relative</span>
+<span class="sd">    positions during the node placements and calculating the absolute positions</span>
+<span class="sd">    at the end. For more information see [1]_.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -291,8 +297,28 @@
         <span class="n">remaining_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">get_canonical_ordering</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">outer_face</span><span class="p">):</span>
+<div class="viewcode-block" id="get_canonical_ordering"><a class="viewcode-back" href="../../../reference/algorithms/generated/networkx.algorithms.planar_drawing.get_canonical_ordering.html#networkx.algorithms.planar_drawing.get_canonical_ordering">[docs]</a><span class="k">def</span> <span class="nf">get_canonical_ordering</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">outer_face</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns a canonical ordering of the nodes</span>
+
+<span class="sd">    The canonical ordering of nodes (v1, ..., vn) must fulfill the following</span>
+<span class="sd">    conditions:</span>
+<span class="sd">    (See Lemma 1 in [2]_)</span>
+
+<span class="sd">    - For the subgraph G_k of the input graph induced by v1, ..., vk it holds:</span>
+<span class="sd">        - 2-connected</span>
+<span class="sd">        - internally triangulated</span>
+<span class="sd">        - the edge (v1, v2) is part of the outer face</span>
+<span class="sd">    - For a node v(k+1) the following holds:</span>
+<span class="sd">        - The node v(k+1) is part of the outer face of G_k</span>
+<span class="sd">        - It has at least two neighbors in G_k</span>
+<span class="sd">        - All neighbors of v(k+1) in G_k lie consecutively on the outer face of</span>
+<span class="sd">          G_k (excluding the edge (v1, v2)).</span>
+
+<span class="sd">    The algorithm used here starts with G_n (containing all nodes). It first</span>
+<span class="sd">    selects the nodes v1 and v2. And then tries to find the order of the other</span>
+<span class="sd">    nodes by checking which node can be removed in order to fulfill the</span>
+<span class="sd">    conditions mentioned above. This is done by calculating the number of</span>
+<span class="sd">    chords of nodes on the outer face. For more information see [1]_.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -303,14 +329,20 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    node_list : list</span>
-<span class="sd">        All nodes ordered by the canonical ordering</span>
+<span class="sd">    ordering : list</span>
+<span class="sd">        A list of tuples `(vk, wp_wq)`. Here `vk` is the node at this position</span>
+<span class="sd">        in the canonical ordering. The element `wp_wq` is a list of nodes that</span>
+<span class="sd">        make up the outer face of G_k.</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. [1] Steven Chaplick.</span>
 <span class="sd">        Canonical Orders of Planar Graphs and (some of) Their Applications 2015</span>
 <span class="sd">        https://wuecampus2.uni-wuerzburg.de/moodle/pluginfile.php/545727/mod_resource/content/0/vg-ss15-vl03-canonical-orders-druckversion.pdf</span>
+<span class="sd">    .. [2] M. Chrobak and T.H. Payne:</span>
+<span class="sd">        A Linear-time Algorithm for Drawing a Planar Graph on a Grid 1989</span>
+<span class="sd">        http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.51.6677</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">v1</span> <span class="o">=</span> <span class="n">outer_face</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">v2</span> <span class="o">=</span> <span class="n">outer_face</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -333,16 +365,16 @@
         <span class="n">outer_face_cw_nbr</span><span class="p">[</span><span class="n">prev_nbr</span><span class="p">]</span> <span class="o">=</span> <span class="n">outer_face</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
         <span class="n">prev_nbr</span> <span class="o">=</span> <span class="n">outer_face</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">is_outer_face_nbr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">outer_face_ccw_nbr</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">outer_face_cw_nbr</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="n">w</span>
-        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">outer_face_cw_nbr</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">outer_face_ccw_nbr</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="n">w</span>
-        <span class="k">return</span> <span class="n">outer_face_ccw_nbr</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="n">w</span> <span class="ow">or</span> <span class="n">outer_face_cw_nbr</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="n">w</span>
+    <span class="k">def</span> <span class="nf">is_outer_face_nbr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">outer_face_ccw_nbr</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">outer_face_cw_nbr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">outer_face_cw_nbr</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">outer_face_ccw_nbr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span>
+        <span class="k">return</span> <span class="n">outer_face_ccw_nbr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span> <span class="ow">or</span> <span class="n">outer_face_cw_nbr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span>
 
-    <span class="k">def</span> <span class="nf">is_on_outer_face</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">marked_nodes</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">in</span> <span class="n">outer_face_ccw_nbr</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span>
-                                          <span class="n">v</span> <span class="o">==</span> <span class="n">v1</span> <span class="ow">or</span> <span class="n">v</span> <span class="o">==</span> <span class="n">v2</span><span class="p">)</span>  <span class="c1"># TODO: We can remove the v1 or the v2 comparison check which</span>
+    <span class="k">def</span> <span class="nf">is_on_outer_face</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">marked_nodes</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">outer_face_ccw_nbr</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span>
+                                          <span class="n">x</span> <span class="o">==</span> <span class="n">v1</span><span class="p">)</span>
 
     <span class="c1"># Initialize number of chords</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">outer_face</span><span class="p">:</span>
@@ -366,7 +398,10 @@
         <span class="c1"># v has exactly two neighbors on the outer face (wp and wq)</span>
         <span class="n">wp</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">wq</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">for</span> <span class="n">nbr</span> <span class="ow">in</span> <span class="n">embedding</span><span class="o">.</span><span class="n">neighbors_cw_order</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>  <span class="c1"># TODO: Break if wp and wq are found</span>
+        <span class="c1"># Iterate over neighbors of v to find wp and wq</span>
+        <span class="n">nbr_iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">neighbors_cw_order</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">nbr</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">nbr_iterator</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">nbr</span> <span class="ow">in</span> <span class="n">marked_nodes</span><span class="p">:</span>
                 <span class="c1"># Only consider nodes that are not yet removed</span>
                 <span class="k">continue</span>
@@ -391,7 +426,7 @@
         <span class="n">wp_wq</span> <span class="o">=</span> <span class="p">[</span><span class="n">wp</span><span class="p">]</span>
         <span class="n">nbr</span> <span class="o">=</span> <span class="n">wp</span>
         <span class="k">while</span> <span class="n">nbr</span> <span class="o">!=</span> <span class="n">wq</span><span class="p">:</span>
-            <span class="c1"># Get next next neighbor (lies clockwise on the outer face)</span>
+            <span class="c1"># Get next next neighbor (clockwise on the outer face)</span>
             <span class="n">next_nbr</span> <span class="o">=</span> <span class="n">embedding</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">nbr</span><span class="p">][</span><span class="s1">&#39;ccw&#39;</span><span class="p">]</span>
             <span class="n">wp_wq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_nbr</span><span class="p">)</span>
             <span class="c1"># Update outer face</span>
@@ -427,7 +462,7 @@
         <span class="c1"># Set the canonical ordering node and the list of contour neighbors</span>
         <span class="n">canonical_ordering</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">wp_wq</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">canonical_ordering</span>
+    <span class="k">return</span> <span class="n">canonical_ordering</span></div>
 
 
 <span class="k">def</span> <span class="nf">triangulate_face</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
@@ -459,7 +494,7 @@
         <span class="n">_</span><span class="p">,</span> <span class="n">v4</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">next_face_half_edge</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">triangulate_embedding</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">fully_triangulate</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="triangulate_embedding"><a class="viewcode-back" href="../../../reference/algorithms/generated/networkx.algorithms.planar_drawing.triangulate_embedding.html#networkx.algorithms.planar_drawing.triangulate_embedding">[docs]</a><span class="k">def</span> <span class="nf">triangulate_embedding</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">fully_triangulate</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Triangulates the embedding.</span>
 
 <span class="sd">    Traverses faces of the embedding and adds edges to a copy of the</span>
@@ -478,16 +513,16 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    embedding : nx.PlanarEmbedding</span>
-<span class="sd">        A new embedding containing all edges from the input embedding and the</span>
-<span class="sd">        additional edges to triangulate the graph.</span>
+<span class="sd">    (embedding, outer_face) : (nx.PlanarEmbedding, list) tuple</span>
+<span class="sd">        The element `embedding` is a new embedding containing all edges from</span>
+<span class="sd">        the input embedding and the additional edges to triangulate the graph.</span>
+<span class="sd">        The element `outer_face` is a list of nodes that lie on the outer face.</span>
+<span class="sd">        If the graph is fully triangulated these are three arbitrary connected</span>
+<span class="sd">        nodes.</span>
 
-<span class="sd">    outer_face : list</span>
-<span class="sd">        A list of nodes that lie on the outer face. If the graph is fully</span>
-<span class="sd">        triangulated these are three arbitrary connected nodes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">embedding</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">embedding</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
     <span class="n">embedding</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">PlanarEmbedding</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
 
     <span class="c1"># Get a list with a node for each connected component</span>
@@ -526,7 +561,7 @@
         <span class="n">v3</span> <span class="o">=</span> <span class="n">embedding</span><span class="p">[</span><span class="n">v2</span><span class="p">][</span><span class="n">v1</span><span class="p">][</span><span class="s1">&#39;ccw&#39;</span><span class="p">]</span>
         <span class="n">outer_face</span> <span class="o">=</span> <span class="p">[</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="n">embedding</span><span class="p">,</span> <span class="n">outer_face</span>
+    <span class="k">return</span> <span class="n">embedding</span><span class="p">,</span> <span class="n">outer_face</span></div>
 
 
 <span class="k">def</span> <span class="nf">make_bi_connected</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">starting_node</span><span class="p">,</span> <span class="n">outgoing_node</span><span class="p">,</span> <span class="n">edges_counted</span><span class="p">):</span>
@@ -567,6 +602,8 @@
 
     <span class="c1"># Move the nodes v1, v2, v3 around the face:</span>
     <span class="k">while</span> <span class="n">v2</span> <span class="o">!=</span> <span class="n">starting_node</span> <span class="ow">or</span> <span class="n">v3</span> <span class="o">!=</span> <span class="n">outgoing_node</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">v1</span> <span class="o">==</span> <span class="n">v2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXException</span><span class="p">(</span><span class="s2">&quot;Invalid half-edge&quot;</span><span class="p">)</span>
         <span class="c1"># cycle is not completed yet</span>
         <span class="k">if</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">face_set</span><span class="p">:</span>
             <span class="c1"># v2 encountered twice: Add edge to ensure 2-connectedness</span>
@@ -600,7 +637,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2004-2018, NetworkX Developers.
-      Last updated on Aug 14, 2018.
+      Last updated on Aug 16, 2018.
 
     </p>
   </div>
@@ -622,7 +659,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2rc1.dev20180814091355',
+            VERSION:'2.2rc1.dev20180816183810',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
